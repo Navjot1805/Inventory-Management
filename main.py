@@ -1,5 +1,18 @@
 from fastapi import FastAPI, Depends,HTTPException
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
+
+app = FastAPI() # intialize API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or Streamlit URL later
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 import models
 import Schemas
@@ -9,7 +22,7 @@ from database import engine, SessionLocal
 # create tables
 models.Base.metadata.create_all(bind=engine)
 #Create all tables defined in models if they don’t exist
-app = FastAPI() # intialize API
+
 
 # dependency connection like DB. (DB Session)
 
