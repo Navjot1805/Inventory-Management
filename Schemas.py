@@ -1,11 +1,12 @@
 
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
+from typing import Annotated
 
 
 
 class ProductCreate(BaseModel):
-    name: str
-    price: int
+    name: Annotated[str,Field(...,description="enter name of product")]
+    price: Annotated[int,Field(...,description="enter price of product",gt=0)]
 
 
 
